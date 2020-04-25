@@ -45,34 +45,29 @@
       System.out.println("\nOption 1: Trade");
       System.out.println("Option 2: Show Trade History");
       System.out.println("Option 3: Quit\n");
-      
+	    
+			Timer timer = new Timer();
+			timer.schedule(
+				new TimerTask(){
+					@Override
+					public void run() {
+						double start = 100;
+						double end = 250;
+						double random = new Random().nextDouble();
+						double result = start + (random * (end - start));
+						DecimalFormat df = new DecimalFormat("##.##");
+						String dfresult = df.format(result);
+						Double result1 = Double.parseDouble(dfresult);
+						AAPLval = result1;      
+					}
+				}
+			, 30000);
 
-      
-       
-    	  Timer timer = new Timer();
-    	  timer.schedule(
-    		    	new TimerTask(){
-    		          @Override
-    		          public void run() {
-    		        	  double start = 100;
-    		              double end = 250;
-    		              double random = new Random().nextDouble();
-    		              double result = start + (random * (end - start));
-    		              DecimalFormat df = new DecimalFormat("##.##");
-    		              String dfresult = df.format(result);
-    		              Double result1 = Double.parseDouble(dfresult);
-    		              AAPLval = result1;      
-    		          }
-    		    	}
-    		    	, 30000);
-      
-    	  run1();
-          run2();
-          run3();
-          run4();
-      
-      
-      
+			run1();
+			run2();
+			run3();
+			run4();
+		
       NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
       System.out.println("\nAmount of Money Left: " + "$" + numberFormat.format(Math.round(MONEY * 100.000)/100.000));
       System.out.println("\nAmount of AAPL stocks: " + stockAAPLval);
@@ -92,15 +87,13 @@
         
       }
       
-      
       if(input1 == 1) {
         
         System.out.println("Do you want to buy stocks or sell stocks? (Enter 'Buy' or 'Sell')");
         String input2 = input.next();
         
         if(input2.equalsIgnoreCase("Buy")) {
-          
-       
+					
           PrintStocks();
           System.out.println("Which stock would you like to buy (Enter Number)");
           int stockInput = input.nextInt();
@@ -349,7 +342,6 @@
             }
             catch(InputMismatchException e) {
               System.out.println("You have entered something wrong. Try again.");
-              
             }
           }
           
@@ -677,8 +669,7 @@
     	return unprofitloss;
     }
     
-    protected static void PrintStocks() {
-        
+    protected static void PrintStocks() {  
         System.out.println("____________________________");
         System.out.println("(1) AAPL Stock Value: " + AAPLval + " |");
         System.out.println("----------------------------");
@@ -691,6 +682,5 @@
         System.out.println("(5) COST Stock Value: " + COSTval + " |");
         System.out.println("----------------------------");
     }
-    
-    
+		
   }
